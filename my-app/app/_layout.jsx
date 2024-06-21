@@ -35,6 +35,6 @@ if(!(fontsLoaded) && !error)
 
   
 
-export default RootLayout //nothing
+export default RootLayout //nothingg
 
 
