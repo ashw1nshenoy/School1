@@ -20,10 +20,11 @@ export default function App() {
                 className="max-w-[380px] w-full h-[300px]"
                 resizeMode='contain'/>
         <View className="relative mt-5">
-            <Text className="text-3xl text-white text-center font-bold">Discover Endless Possibilites with 
-            <Text className="text-secondary-200"> EduConnect</Text></Text>
+            <Text className="text-3xl text-white text-center font-bold ml-3">EduConnect 
+
+            <Text className="text-secondary-200 "> Connecting Parents with Faculties !</Text></Text>
         </View>
-        <Text className="text-sm font-pregular text-white mt-1 text-center">Where creativity meets innovation : Embark on a journey of limitless exploration with aora</Text>
+        {/* <Text className="text-sm font-pregular text-white mt-1 text-center">Where creativity meets innovation : Embark on a journey of limitless exploration with aora</Text> */}
         <CustomButton title="Continue with Email"
                       handlePress={()=>router.push('/sign-in')}
                       containerStyles="w-full mt-2"

@@ -5,15 +5,47 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import {images} from '../../constants'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-const signIn = () => {
-  const [form,setForm]=useState({
-    email:'',
-    password:''
-  })
-  const [isSubmitting, setisSubmitting] = useState(false)
-  const submit=()=>{
+import axios from 'axios'; // Import axios for HTTP requests
 
-  }
+const signIn = () => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+  const [isSubmitting, setisSubmitting] = useState(false);
+
+  const handleChangeText = (name, value) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const submit = async () => {
+    const { email, password } = form;
+
+    if (!email || !password) {
+      alert('Please enter both email and password.');
+      return;
+    }
+
+    setisSubmitting(true); 
+    console.log(email)
+    try {
+      const response = await axios.post('http:// 192.168.43.5:3000/api/login', {
+        email,
+        password,
+      });
+
+      // Handle successful login based on your backend response format
+      console.log('Login successful:', response.data);
+      alert('Login successful!');
+      // You might redirect to a different screen or store user data
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed. Please check your credentials.'); // Inform user of error
+    } finally {
+      setisSubmitting(false); // Reset loading state
+    }
+  };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
