@@ -29,7 +29,7 @@ const signIn = () => {
     setisSubmitting(true); 
     console.log(email)
     try {
-      const response = await axios.post('http:// 192.168.43.5:3000/api/login', {
+      const response = await axios.post('http://192.168.43.5:3000/api/login', {
         email,
         password,
       });
