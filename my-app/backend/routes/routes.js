@@ -1,9 +1,9 @@
 const express=require('express')
 const router = express.Router()
-const {user,getFirst}=require('../controller/controller')
+const {login,getFirst}=require('../controller/controller')
 router.route('/').get(getFirst)
-router.route('/api/login').post(user)
+router.route('/api/login').post(login)
 
 
 
-module.exports=router
+module.exports=router   

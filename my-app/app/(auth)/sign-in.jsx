@@ -19,18 +19,18 @@ const signIn = () => {
   };
 
   const submit = async () => {
-    const { email, password } = form;
+    const { username, password } = form;
 
-    if (!email || !password) {
+    if (!username || !password) {
       alert('Please enter both email and password.');
       return;
     }
 
     setisSubmitting(true); 
-    console.log(email)
+    console.log(username)
     try {
       const response = await axios.post('http://192.168.43.5:3000/api/login', {
-        email,
+        username,
         password,
       });
 
@@ -56,12 +56,12 @@ const signIn = () => {
                   className="w-[100px] h-[30px]"/> */}
           <Text className="text-2xl text-white text-semibold mt-6 font-semibold">Login to EduConnect</Text>
           <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e)=>setForm({...form,email:e})}
+            title="Username"
+            value={form.username}
+            handleChangeText={(e)=>setForm({...form,username:e})}
             otherStyles='mt-7'
-            placeholder="Enter Email Address"
-            keyboardType='email-address'/>
+            placeholder="Enter Username"
+            keyboardType='text'/>
           <FormField
             title="Password"
             value={form.password}

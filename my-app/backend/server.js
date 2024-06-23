@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const bcrypt = require('bcrypt'); // For password hashing (install with `npm install bcrypt`)
-
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const dotenv= require('dotenv') // For password hashing (install with `npm install bcrypt`)
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default port
 const test=require('./routes/routes')
@@ -18,6 +21,15 @@ const connectDB=require('./db/db')
 // Init Middleware
 app.use(cors());
 app.use(express.json({ extended: false }));
+app.use(cookieParser()); // Parse incoming cookies
+
+// Session configuration
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false, // Don't resave session if not modified
+    saveUninitialized: false, // Only store session if needed
+    cookie: { secure: false } // Set to true for HTTPS in production
+}));
 
 app.use('/',test)
 

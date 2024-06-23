@@ -1,31 +1,39 @@
+const student_details = require("../models/student_details");
+
 const getFirst=(req,res)=>{
     return res.json({Message:'Hi'})
   }
   // Login endpoint (POST request)
-const user= async (req, res) => {
-    const { email, password } = req.body;
-    console.log(req.body)
-    // Find user by email
-    const user = users.find((u) => u.email === email);
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' }); // Unauthorized
-    }
-  
-    // Compare password using bcrypt (replace with your actual password comparison logic)
-    try {
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid email or password' });
+
+const login=async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+      return res.status(400).json({ message: 'Please provide name and phone number' });
+  }
+
+  try {
+      const student = await student_details.findOne({ username });
+
+      if (!student) {
+          return res.status(401).json({ message: 'Invalid credentials' });
       }
-  
-      // Login successful (replace with your logic for generating tokens, sessions, etc.)
-      res.json({ message: 'Login successful!' });
-    } catch (error) {
-      console.error('Error comparing passwords:', error);
-      res.status(500).json({ message: 'Internal server error' });
+
+      const isMatch = await bcrypt.compare(req.body.password, student.phoneNumber);
+
+      if (!isMatch) {
+          return res.status(401).json({ message: 'Invalid credentials' });
+      }
+
+      // Generate JWT token on successful login
+      req.session.parentID = parent._id;
+
+        res.json({ message: 'Login successful' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
     }
-  };
+}
 
 
-
-  module.exports={getFirst,user}
+  module.exports={getFirst,login}
