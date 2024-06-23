@@ -4,12 +4,14 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const mongoose=require('mongoose');
 const dotenv= require('dotenv') // For password hashing (install with `npm install bcrypt`)
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default port
 const test=require('./routes/routes')
 const connectDB=require('./db/db')
+const {Student}= require('./models/student_details')
 // Enable CORS for cross-origin requests from React Native app
 // const corsOptions = {
 //     origin: 'http://localhost:3000', // Replace with your React Native app's origin
@@ -32,6 +34,7 @@ app.use(session({
 }));
 
 app.use('/',test)
+
 
 
 app.listen(port, () => {

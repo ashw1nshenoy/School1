@@ -1,4 +1,4 @@
-import { View, Text, ScrollView,Image } from 'react-native'
+import { View, Text, ScrollView,Image,Linking } from 'react-native'
 import React, { useState } from 'react'
 import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -35,8 +35,15 @@ const signIn = () => {
       });
 
       // Handle successful login based on your backend response format
-      console.log('Login successful:', response.data);
-      alert('Login successful!');
+      if (response.status === 200) { // Check for HTTP status code 200 indicating success
+        console.log('Login successful:', response.data);
+        alert('Login successful!');
+
+
+    } else {
+        console.error('Login failed:', response.data);
+        alert('Login failed. Please check your credentials.'); // Provide informative error messages
+    }
       // You might redirect to a different screen or store user data
     } catch (error) {
       console.error('Login error:', error);
