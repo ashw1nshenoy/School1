@@ -31,7 +31,9 @@ const login=async (req, res) => {
       console.log(isMatch)
 
       if (!isMatch) {
+          console.log('FAIL')
           return res.status(401).json({ message: 'Invalid credentials' });
+
       }
 
       // Generate JWT token on successful login
