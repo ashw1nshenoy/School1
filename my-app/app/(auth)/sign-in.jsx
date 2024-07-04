@@ -1,13 +1,15 @@
 import { View, Text, ScrollView,Image,Linking } from 'react-native'
 import React, { useState } from 'react'
-import { Link } from 'expo-router'
+import { Link,router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native';
 import {images} from '../../constants'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import axios from 'axios'; // Import axios for HTTP requests
+import axios from 'axios'; 
 
 const signIn = () => {
+  const navigation = useNavigation();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -34,22 +36,24 @@ const signIn = () => {
         password,
       });
 
-      // Handle successful login based on your backend response format
-      if (response.status === 200) { // Check for HTTP status code 200 indicating success
+  
+      if (response.status === 200) { 
+
         console.log('Login successful:', response.data);
         alert('Login successful!');
+        router.push('/(tabs)/home');
 
 
     } else {
         console.error('Login failed:', response.data);
-        alert('Login failed. Please check your credentials.'); // Provide informative error messages
+        alert('Login failed. Please check your credentials.'); 
     }
-      // You might redirect to a different screen or store user data
+  
     } catch (error) {
       console.error('Login error:', error);
-      alert('Login failed. Please check your credentials.'); // Inform user of error
+      alert('Login failed. Please check your credentials.'); 
     } finally {
-      setisSubmitting(false); // Reset loading state
+      setisSubmitting(false); 
     }
   };
 
