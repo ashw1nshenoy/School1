@@ -41,7 +41,7 @@ const signIn = () => {
 
         console.log('Login successful:', response.data);
         alert('Login successful!');
-        router.push('/(tabs)/home');
+        router.push('/(home)/index');
 
 
     } else {
